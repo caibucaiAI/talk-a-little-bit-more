@@ -1,8 +1,8 @@
-# Talk a Little Bit（再聊一会儿）Skill
+# Talk a Little Bit More（再聊一会儿）Skill
 
 一个用来复盘对话的 skill。
 
-Skill 名称：`talk-a-little-bit`
+Skill 名称：`talk-a-little-bit-more`
 
 ![再聊一会儿怎么用](assets/how-to-use.png)
 
@@ -17,7 +17,7 @@ Skill 名称：`talk-a-little-bit`
 你不需要记命令，直接这样说就行：
 
 - 我想试试「再聊一会儿」这个 skill
-- 我想试试 `talk-a-little-bit`
+- 我想试试 `talk-a-little-bit-more`
 - 帮我复盘这段对话
 - 我刚聊完一个人，感觉没聊透，帮我看看
 - 这段对话里有没有本可以再聊一会儿的地方

@@ -1,14 +1,14 @@
 ---
-name: talk-a-little-bit
+name: talk-a-little-bit-more
 description: |
-  Talk a Little Bit / 再聊一会儿——一个对话复盘 skill。
+  Talk a Little Bit More / 再聊一会儿——一个对话复盘 skill。
   首次激活触发：开始使用再聊一会儿 skill / 我想试试这个 skill / 这个 skill 怎么用 / 再聊一会儿怎么开始。
   日常触发：帮我复盘这段对话 / 我刚聊完 / 有没有本可以再聊一会儿的地方 / 我漏了什么 / 怎么聊得更好 / 下次怎么聊更舒服。
   用于复盘逐字稿、会议记录、聊天记录片段或用户凭记忆写下来的对话经过。
   不用于面试准备、文章写作、心理诊断或替代专业咨询。
 ---
 
-# Talk a Little Bit（再聊一会儿）
+# Talk a Little Bit More（再聊一会儿）
 
 有些对话不是因为没东西可聊才停下。
 
