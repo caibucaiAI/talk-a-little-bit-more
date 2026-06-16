@@ -1,0 +1,15 @@
+.DS_Store
+.env
+*.log
+*.tmp
+
+# Private inputs and generated personal reviews
+transcripts/
+outputs/
+*-review.md
+*-复盘.md
+
+# Python
+__pycache__/
+.venv/
+venv/
