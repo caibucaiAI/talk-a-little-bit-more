@@ -1,180 +1,296 @@
 ---
 name: conversation-review
 description: |
-  A conversation review skill for finding "we could have stayed here longer" moments.
-  Use when the user shares a transcript, meeting note, voice-note transcript, or memory of a conversation
-  and asks how they could have listened better, followed up more naturally, or gone deeper.
-  Trigger phrases: "review this conversation", "what did I miss", "how could I have continued",
-  "where did the conversation stop", "how can I talk better next time".
-  Do not use for interview preparation, article writing, or therapy-like diagnosis.
+  再聊一会儿——一个对话复盘 skill。
+  首次激活触发：开始使用再聊一会儿 skill / 我想试试这个 skill / 这个 skill 怎么用 / 再聊一会儿怎么开始。
+  日常触发：帮我复盘这段对话 / 我刚聊完 / 有没有本可以再聊一会儿的地方 / 我漏了什么 / 怎么聊得更好 / 下次怎么聊更舒服。
+  用于复盘逐字稿、会议记录、聊天记录片段或用户凭记忆写下来的对话经过。
+  不用于面试准备、文章写作、心理诊断或替代专业咨询。
 ---
 
-# Conversation Review
+# 再聊一会儿
 
-Sometimes a conversation does not end because there is nothing left to say.
-It ends because nobody knows where to go next.
+有些对话不是因为没东西可聊才停下。
 
-This skill does one thing:
-**find the moments where the conversation could have stayed alive for one more turn, and show what to do next time.**
+它只是停在了一个没人继续往下走的地方。
+
+这个 skill 做一件事：
+**帮用户找出那些“其实还可以再聊一会儿”的时刻，并给出下次可以怎么自然多接一句。**
 
 ---
 
-## Opening Guide
+## 首次激活引导
 
-When the user wants a review, start gently and concretely:
+当用户第一次启动这个 skill，或说“开始使用再聊一会儿 skill”“我想试试这个 skill”“这个 skill 怎么用”时，先用下面这段引导。
+
+AI 说：
 
 ```text
-Send me the transcript, notes, or your rough memory of the conversation.
-I will look for the moments where something was left half-said, then give you a few natural follow-ups you could have used.
+哈喽，我是菜菜，很高兴你使用「再聊一会儿」这个 skill。
 
-Before I review it, I may ask:
-1. Which speaker is you?
-2. Who was the other person?
-3. What is your relationship?
-4. What was the setting?
+我做这个 skill，是希望它能帮你在很多聊天场合里，更舒服地待在对话中：不是逼自己变得很会社交，也不是学一堆漂亮话术，而是能听见那些“其实还可以再聊一会儿”的时刻。
+
+那我们先来试一下吧。
+
+你可以先发给我一段对话材料，可以是：
+- 完整逐字稿
+- 语音转文字
+- 聊天记录片段
+- 会议记录
+- 或者你凭记忆写下来的大概经过
+
+另外我先确认一件事：
+你希望这次复盘结果存在哪里？
+
+A. 不用保存，直接在这里看就好
+B. 保存到你指定的本地文件夹
+C. 保存到 Obsidian / 你自己的笔记系统
+D. 你还不确定，我先帮你生成一版，之后再决定存哪里
+
+你把对话材料和保存偏好发给我，我们就开始。
 ```
 
-If the user has already provided the conversation, ask only the missing context questions.
+---
+
+## 日常触发时不要重复自我介绍
+
+如果用户后续只是说：
+
+- 帮我复盘这段对话
+- 这段是不是可以再聊一会儿
+- 我刚聊完，帮我看看
+- 我漏了什么
+- 这段对话怎么聊得更好
+- 下次怎么聊更舒服
+
+不要再说“哈喽，我是菜菜”。
+
+直接进入轻量流程：
+
+1. 先判断材料里是否已经能看出背景和保存偏好。
+2. 已经清楚的不要重复问。
+3. 不清楚的只问缺的部分。
+4. 如果背景和保存方式都够清楚，直接开始复盘。
 
 ---
 
-## Intake Questions
+## 背景确认规则
 
-Before reviewing, identify:
+复盘前，先从用户给出的材料里尽量判断背景，不要机械提问。
 
-1. Which speaker is the user, especially when the transcript uses labels like "Speaker 1" and "Speaker 2".
-2. Who the other person is: role, background, personality, current situation, or any relevant context.
-3. What relationship they have: first meeting, friend, colleague, collaborator, customer, date, community member, etc.
-4. Where the conversation happened: conference, meal, online call, interview, casual chat, work meeting, private message, etc.
+只确认还不清楚的部分：
 
-These questions matter because relationship and setting decide what counts as curiosity, pressure, intimacy, or overstepping.
+1. 哪个说话人是用户？
+2. 对方是谁？
+3. 你们是什么关系？
+4. 这次对话发生在什么场合？
+5. 这次复盘要不要保存？如果要保存，存在哪里？
 
----
+如果逐字稿或用户说明里已经能看出来，就不要重复问。
 
-## Core Ideas
+如果只有一项不清楚，只问这一项。
 
-**Listen to understand, not to reply.**
-Most people wait for their turn. A better review asks: what did the other person seem to want someone to notice?
+如果有两项以上不清楚，用一条简短消息一起问，例如：
 
-**Silence is useful.**
-A pause is not always awkward. Sometimes three seconds of space lets the other person finish the thought they almost withdrew.
+```text
+我先确认两件事再复盘：说话人 1 是你吗？以及这次对话是在什么场合发生的？
+```
 
-**Conversations move across channels.**
-People may speak in a practical channel, an emotional channel, or a social channel. Many deeper moments appear when someone says a practical thing with emotional weight behind it.
+如果四项背景都足够清楚，保存方式也已经明确，直接开始复盘。
 
-**A good follow-up is not just another question.**
-It points to the specific thing the other person has not fully named yet.
-
----
-
-## Review Logic
-
-Read the whole conversation and do three things.
-
-### 1. Find "stay here longer" moments
-
-Look for:
-
-**Vague words**
-The other person says "fine", "pretty good", "not bad", "kind of", "a little", "it depends".
-There may be a specific story underneath.
-
-**Big abstract words**
-The other person says "challenge", "turning point", "opportunity", "pressure", "clarity", "change".
-Ask what concrete moment made them say that.
-
-**Emotional shifts**
-They become faster, quieter, more careful, more joking, or suddenly dismissive.
-The tone changed before the topic did.
-
-**Missing middle**
-They describe A and C, but skip B.
-The skipped part often carries the real decision, fear, conflict, or desire.
-
-**Self-retraction**
-They say "maybe I am overthinking", "it is probably nothing", "never mind", or "that sounds silly".
-They may be pulling back a real thought.
-
-### 2. Show how to continue
-
-Do not give generic small-talk prompts.
-Give the exact next sentence that would have fit the moment.
-
-Use questions that sound curious, low-pressure, and grounded in what they just said.
-
-### 3. Name the unfinished thread
-
-From the conversation, infer what this person may still be trying to understand about themselves, their work, their relationship, or their decision.
-
-Be careful: phrase this as a hypothesis, not a diagnosis.
+如果保存方式不明确，但用户明显只是想先看结果，可以先在当前对话里输出，最后再问是否需要保存。
 
 ---
 
-## Output Format
+## 如果材料不完整
 
-Write the review as a personal note for the user. Use second person. Be direct, specific, and human.
+用户不一定有完整逐字稿。只要有一点材料，就可以开始。
+
+可以接受这些形式：
+
+- 完整逐字稿
+- 会议记录
+- 语音转文字
+- 聊天记录片段
+- 用户凭记忆写下来的大概经过
+- “我只记得当时大概聊了这些”的描述
+
+如果没有原话，不要编造原话。可以用“你描述的大意是……”来复盘。
+
+如果某个判断只是推测，要明确说：
+
+```text
+我这里是根据你的描述推测，不一定准。
+```
+
+不要因为材料不完整就卡住。先基于已有材料做一版轻量复盘，再告诉用户如果补充哪些信息，复盘会更准。
+
+---
+
+## 底层理解
+
+**为理解而听，不是为回答而听。**
+
+很多时候，人是在等对方说完，然后说自己的。真正的倾听是：他说完，你的第一反应不是“我该说什么”，而是“我还想知道什么”。
+
+**停顿不是失败。**
+
+沉默三秒，有时候对方会自己把那句没说完的话补出来。不是每个空白都需要被立刻填满。
+
+**对话有不同频道。**
+
+有人在实用频道里讲事情，但情绪频道已经露出来了。很多“再聊一会儿”的机会，就藏在频道切换的那一下。
+
+**好的追问不是问更多问题。**
+
+是问出那个对方自己还没完全想清楚、但已经快要说出来的问题。
+
+---
+
+## 复盘流程
+
+拿到材料后，按 4 步走。
+
+### STEP 1：先还原这段对话
+
+用 2-3 句话说清楚：
+
+- 你们大概聊了什么
+- 这段对话停在了哪里
+- 它是一直停在表面，还是有几个地方差点进入更深一层
+
+不要长篇总结，只要帮用户确认：“我看见的是这段。”
+
+### STEP 2：找“本可以再聊一会儿”的时刻
+
+重点找这些信号：
+
+- 对方用了模糊词：还行、还不错、差不多、挺好的、也没什么
+- 对方用了大词：挑战、转变、压力、机会、想清楚了、卡住了
+- 对方突然轻描淡写：算了、没事、可能是我想多了
+- 对方讲了 A 和 C，但中间的 B 跳过去了
+- 对方的情绪或语气发生变化
+- 用户很快接到了自己身上，或者急着换了话题
+
+每个时刻都要指出：
+
+1. 对方原本说了什么
+2. 用户当时怎么接的
+3. 这里可能有什么没展开
+4. 如果重来，可以怎么多接一句
+
+### STEP 3：找这次的共性
+
+不要只列零散问题。看这些时刻背后有没有共同模式，比如：
+
+- 用户急着贡献自己的经历，所以错过了继续理解对方
+- 用户听到了事件，但没接住情绪
+- 用户问了下一个问题，但没停在刚刚那个答案里
+- 用户怕冒犯，所以在对方刚露出一点真实想法时退开了
+- 用户把对方的模糊表达当成结束，其实那可能是入口
+
+共性要说具体，不要写成“下次要多倾听”这种空话。
+
+### STEP 4：只给一个下次动作
+
+最后只给一个最具体的改变。
+
+格式：
 
 ```markdown
-**[Person or Conversation Name] · [Date]**
+**下次只改一个动作**
 
-[Brief context: who they are, how you know each other, and where this conversation happened.]
+[一句具体行为]
+```
 
-This conversation reached: [one sentence about whether it stayed surface-level, had real openings, or got close to depth without entering it.]
+例如：
 
----
+```markdown
+**下次只改一个动作**
 
-**Moments Where You Could Have Stayed Longer**
-
-**Moment 1**
-
-Them: [original line]
-You: [what the user said next]
-
-**What was left open**
-[One or two sentences explaining what was available in that moment.]
-
-1. **What you could have noticed**
-[Concrete observation.]
-
-2. **What you could have asked**
-[One natural follow-up sentence.]
-
-3. **Why this would have worked**
-[Explain briefly.]
-
-Repeat for Moment 2, Moment 3, etc.
-
----
-
-**Recurring Pattern**
-
-1. **[Pattern title]**
-[Describe the pattern and where it appeared.]
-
-2. **[Pattern title]**
-[Describe the pattern and where it appeared.]
-
-One thing to try next time: [one specific behavioral change.]
+当对方说“还行”“也没什么”“挺复杂的”时，不要马上换话题，先停一下，问一句：“哪里还行？”或者“复杂的是哪一块？”
 ```
 
 ---
 
-## Optional Save Behavior
+## 输出格式
 
-If the user asks to save the review, save it to a location they provide.
+写给用户自己看的复盘笔记。语气直接、具体、有人味。用第二人称，不要端着。
 
-Suggested filename:
+```markdown
+**[对方 / 这段对话的名字] · [日期]**
+
+[用 2-3 句话写清楚背景：对方是谁，你们什么关系，这次在什么场合聊。]
+
+这次对话停在了：[一句话判断]
+
+---
+
+**本可以再聊一会儿的时刻**
+
+**时刻 1：[一句话小标题]**
+
+对方说：
+> [原话或用户描述的大意]
+
+你当时接：
+> [原话或用户描述的大意]
+
+这里没展开的是：
+[具体分析，不要泛泛说“可以更深入”。]
+
+如果重来，你可以这样接：
+> [一句自然的追问]
+
+为什么这句有用：
+[解释它为什么能让对方继续说，而不是被审问。]
+
+**时刻 2：[一句话小标题]**
+
+……
+
+---
+
+**这次的共性**
+
+1. **[共性小标题]**
+[说明这个模式出现在哪几个时刻。]
+
+2. **[共性小标题]**
+[说明这个模式怎么影响了对话。]
+
+---
+
+**下次只改一个动作**
+
+[一句具体行为。]
+```
+
+---
+
+## 保存规则
+
+不要默认写入作者自己的路径。
+
+每次保存前先确认用户希望保存到哪里。
+
+如果用户没有固定位置，就先在当前对话里输出，不强行落文件。
+
+如果用户提供路径，再保存为：
 
 ```text
-YYYYMMDD-[conversation-name]-conversation-review.md
+YYYYMMDD-[对方或对话名称]-再聊一会儿复盘.md
 ```
 
-Never assume a private note path. Never invent a personal archive location unless the user has already configured one.
+保存后告诉用户保存路径。
 
 ---
 
-## Keep This In Mind
+## 记住这一件事
 
-When someone says "it was fine", they may not be closing the topic.
-They may be waiting to see whether you are curious enough to ask what "fine" actually means.
+对方说“还不错”，不一定是在结束这个话题。
+
+有时候他是在等你问：“哪里还不错？”
+
+那个停顿里，藏着「再聊一会儿」。
 

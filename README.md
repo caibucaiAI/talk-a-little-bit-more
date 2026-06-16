@@ -1,40 +1,118 @@
-# Conversation Review Skill
+# 再聊一会儿 Skill
 
-A reusable agent skill for reviewing conversations and finding the moments where the conversation could have gone one layer deeper.
+一个用来复盘对话的 skill。
 
-The original private version was built for post-event conversation reviews. This public version keeps the same structure, but removes personal names, local note paths, private storage rules, and provider-specific workflow assumptions.
+它会帮你找出那些“其实还可以再停一下”的时刻：哪里有话没说完，哪里你接偏了，哪里如果多问一句，对话可能就会往下走。
 
-## What It Does
+这个公开版保留了原本的复盘结构和首次使用引导，但去掉了作者自用的本地路径、私人笔记规则和真实对话材料。
 
-Give the agent a transcript, meeting note, or rough memory of a conversation. The skill helps it:
+---
 
-- identify moments where the other person left something unsaid
-- explain why the conversation stopped there
-- suggest one natural follow-up question for next time
-- summarize recurring patterns in how the conversation was handled
-- optionally turn the review into a personal note
+## 你可以怎么叫它
 
-## Opening Prompt
+你不需要记命令，直接这样说就行：
 
-Use this when you want the skill to start a review:
+- 我想试试「再聊一会儿」这个 skill
+- 帮我复盘这段对话
+- 我刚聊完一个人，感觉没聊透，帮我看看
+- 这段对话里有没有本可以再聊一会儿的地方
+- 我是不是漏接了什么
+- 如果下次再遇到类似的人，我可以怎么聊得更舒服一点
+
+---
+
+## 首次使用时会发生什么
+
+第一次启动这个 skill 时，它会先这样带你开始：
 
 ```text
-I want to review a conversation. Please help me find the moments where I could have stayed curious for one more turn.
+哈喽，我是菜菜，很高兴你使用「再聊一会儿」这个 skill。
 
-Here is the transcript or my memory of what happened:
-[paste conversation]
+我做这个 skill，是希望它能帮你在很多聊天场合里，更舒服地待在对话中：不是逼自己变得很会社交，也不是学一堆漂亮话术，而是能听见那些“其实还可以再聊一会儿”的时刻。
 
-Before reviewing it, ask me anything you need to know about who I was, who the other person was, our relationship, and the setting.
+那我们先来试一下吧。
+
+你可以先发给我一段对话材料，可以是：
+- 完整逐字稿
+- 语音转文字
+- 聊天记录片段
+- 会议记录
+- 或者你凭记忆写下来的大概经过
+
+另外我先确认一件事：
+你希望这次复盘结果存在哪里？
+
+A. 不用保存，直接在这里看就好
+B. 保存到你指定的本地文件夹
+C. 保存到 Obsidian / 你自己的笔记系统
+D. 你还不确定，我先帮你生成一版，之后再决定存哪里
+
+你把对话材料和保存偏好发给我，我们就开始。
 ```
 
-## Files
+后面再次使用时，它不会重复说“哈喽，我是菜菜”。它会直接看你发来的材料，缺什么背景就问什么，够清楚就直接开始复盘。
 
-- `SKILL.md` - the actual skill instructions
-- `run_example.py` - optional script for processing long transcript files through an OpenAI-compatible API
-- `requirements.txt` - Python dependency for the optional script
-- `.gitignore` - keeps private transcripts, outputs, and environment files out of git
+---
 
-## Optional Script Usage
+## 你可以发什么材料
+
+不一定要有完整逐字稿。下面这些都可以：
+
+- 完整逐字稿
+- 会议记录
+- 语音转文字
+- 聊天记录片段
+- 你凭记忆写下来的大概经过
+- “我只记得当时大概聊了这些”的描述
+
+如果没有原话，它不会编造原话，会用“你描述的大意是……”来复盘。
+
+---
+
+## 它会怎么问背景
+
+复盘前，它会先从你给出的材料里判断：
+
+1. 哪个说话人是你
+2. 对方是谁
+3. 你们是什么关系
+4. 这次对话发生在什么场合
+
+如果材料里已经能看出来，就不会重复问。
+
+如果只有一项不清楚，只问这一项。
+
+如果有两项以上不清楚，会用一条简短消息一起问。
+
+如果四项都足够清楚，就直接开始复盘。
+
+---
+
+## 它会输出什么
+
+它会帮你看四件事：
+
+1. 哪里其实还有话没说完
+2. 你当时为什么没有接住
+3. 如果重来，可以怎么多接一句
+4. 下次只需要改一个动作，是什么
+
+它不是用来给你上社交课，也不是用来诊断别人。它更像一个很会听的人坐在旁边，帮你把对话里那些细小的停顿重新看一遍。
+
+---
+
+## 文件说明
+
+- `SKILL.md`：skill 主体说明
+- `run_example.py`：可选脚本，用 OpenAI 兼容接口处理较长逐字稿
+- `requirements.txt`：可选脚本依赖
+- `.gitignore`：避免把私人逐字稿、输出结果和环境文件传到公开仓库
+
+---
+
+## 可选脚本用法
+
+如果你想用脚本处理一份本地逐字稿：
 
 ```bash
 pip install -r requirements.txt
@@ -42,6 +120,12 @@ export OPENAI_API_KEY="your_api_key"
 python run_example.py transcript.txt
 ```
 
-## Privacy Notes
+脚本只是可选辅助；正常使用 skill 不需要跑脚本。
 
-Do not commit real transcripts, contact names, API keys, or private note paths. Keep the skill generic and put personal examples in a private copy.
+---
+
+## 隐私提醒
+
+不要把真实逐字稿、联系人姓名、手机号、微信号、API key 或私人笔记路径提交到公开仓库。
+
+如果要放案例，建议用虚构对话或充分脱敏后的材料。
